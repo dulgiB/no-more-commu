@@ -8,9 +8,9 @@ import pandas as pd
 import config
 from Field import *
 
-auth = tweepy.OAuthHandler("0Wz4l79bVgUXWq7ivKZfsb2qn", "JTmXDttWmKbu5uHybg1I6XEOBZWS2EDv3tsi982PFr8wfNI3lD")
-auth.set_access_token("1425401909007896584-ak3oSzCxIvDICjCqWxBX3N8pX9PY1Y",
-                      "RdP4UPy0WkTnvXc7Tkcnm6LcFn3t1savYH4wBQCk4F0E2")
+auth = tweepy.OAuthHandler("USER_TOKEN", "USER_TOKEN_SECRER")
+auth.set_access_token("ACCESS_TOKEN",
+                      "ACCESS_TOKEN_SECRET")
 
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 logging.basicConfig(format="", level=logging.INFO)
