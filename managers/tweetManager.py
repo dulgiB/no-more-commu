@@ -1,9 +1,10 @@
 from requests_oauthlib import OAuth1Session
 import os
 import json
+import config
 
-consumer_key = os.environ.get("CONSUMER_KEY")
-consumer_secret = os.environ.get("CONSUMER_SECRET")
+consumer_key = config.CONSUMER_KEY
+consumer_secret = config.CONSUMER_SECRET
 
 def authorize():
     request_token_url = "https://api.twitter.com/oauth/request_token?oauth_callback=oob&x_auth_access_type=write"
@@ -50,26 +51,26 @@ def authorize():
     
     return oauth
 
-def publicTweet(text: str, oauth: OAuth1Session):
-    payload = {"text": text}
-
-    # Making the request
-    response = oauth.post(
-        "https://api.twitter.com/2/tweets",
-        json=payload,
-    )
-
-    if response.status_code != 201:
-        raise Exception(
-            "Request returned an error: {} {}".format(response.status_code, response.text)
-        )
-
-    print("Response code: {}".format(response.status_code))
-
-    # Saving the response as JSON
-    json_response = response.json()
-    print(json.dumps(json_response, indent=4, sort_keys=True))
-
 class TweetManager():
     def __init__(self) -> None:
-        pass
+        self.oauth = authorize()
+
+    def sendTweet(self, text):
+        payload = {"text": text}
+
+        # Making the request
+        response = self.oauth.post(
+            "https://api.twitter.com/2/tweets",
+            json=payload,
+        )
+
+        if response.status_code != 201:
+            raise Exception(
+                "Request returned an error: {} {}".format(response.status_code, response.text)
+            )
+
+        print("Response code: {}".format(response.status_code))
+
+        # Saving the response as JSON
+        json_response = response.json()
+        print(json.dumps(json_response, indent=4, sort_keys=True))
