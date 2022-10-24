@@ -1,4 +1,5 @@
 import random
+from enum import Enum
 
 # 기본적인 전투의 뼈대
 # 세부적인 시스템에 따라 이 오브젝트를 상속해서 오버라이드
@@ -17,10 +18,36 @@ class Mob(object):
         self.idx = idx
 
 class Skill(object):
-    # 복잡한 스킬 구현을 위한 스킬 클래스
-    # 스킬 레벨, 스킬 효과, 사용 가능 횟수 등을 유동적으로 기록할 수 있다.
-    def __init__(self) -> None:
-        pass
+    # 스킬은 네 종류
+    SkillType = Enum("SkillType", "SNIPE ACCEL SEEK LEAP")
+
+    def __init__(self, skillType:SkillType) -> None:
+        self.skillType = skillType
+    
+    def snipeSkill(self):
+        return
+    
+    def snipeSkill(self):
+        return
+    
+    def snipeSkill(self):
+        return
+    
+    def snipeSkill(self):
+        return
+    
+    def execute(self):
+        match self.skillType:
+            case self.SkillType.SNIPE:
+                self.snipeSkill()
+            case self.SkillType.ACCEL:
+                return
+            case self.SkillType.SEEK:
+                return
+            case self.SkillType.LEAP:
+                pass
+            case _:
+                return
 
 class BattleManager():
     def __init__(self) -> None:
